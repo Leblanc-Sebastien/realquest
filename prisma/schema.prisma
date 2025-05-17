@@ -1,12 +1,61 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+enum Title {
+  NOOB
+  PORTE_CHAUSSETTES
+  RODEUR_TIMIDE
+  DISCIPLINAIRE_DEBUTANT
+  SCRIBE_DES_TACHES
+  MERCENAIRE_ORGANISE
+  TEMPLIER_DE_L_EFFORT
+  ELU_DES_HABITUDES
+  PALADIN_DU_QUOTIDIEN
+  ARCHIMAGE_DE_LA_CONSTANCE
+}
+
+model User {
+  id          Int         @id @default(autoincrement())
+  userName    String      @unique
+  createdAt   DateTime    @default(now())
+  xp          Int         @default(0)
+  level       Int         @default(0)
+  title       Title       @default(NOOB)
+  quests      Quest[]     
+  logs        QuestLog[]  
+}
+
+enum Frequency {
+  NONE
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+model Quest {
+  id           Int       @id @default(autoincrement())
+  title        String    @unique
+  description  String
+  createdAt    DateTime  @default(now())
+  scheduledAt  DateTime? 
+  frequency    Frequency @default(NONE) 
+  repeat       Boolean   @default(false) 
+  userId       Int
+  user         User @relation(fields: [userId], references: [id])
+  logs         QuestLog[]  
+}
+
+model QuestLog {
+  id            Int         @id @default(autoincrement())
+  questId       Int
+  quest         Quest       @relation(fields: [questId], references: [id])
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id]) 
+  completedAt   DateTime    @default(now())
+}
+
