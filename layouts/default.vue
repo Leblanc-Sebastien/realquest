@@ -5,7 +5,7 @@
         <div class="absolute right-4 flex justify-center items-center">
             <BurgerMenu />
         </div>
-</header>
+    </header>
     <main class="p-6">
       <slot />
     </main>
