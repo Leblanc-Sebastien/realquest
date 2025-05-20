@@ -10,6 +10,9 @@
     "postinstall": "nuxt prepare",
     "build:android": "nuxi generate && npx cap copy && npx cap open android"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@capacitor/android": "^7.2.0",
     "@capacitor/cli": "^7.2.0",
