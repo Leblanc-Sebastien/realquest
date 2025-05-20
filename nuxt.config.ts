@@ -11,5 +11,16 @@ export default defineNuxtConfig({
     display: 'swap',
     download: true,
     inject: true
-  }
+  },
+  // nitro : {
+  //   externals: {
+  //     external: ['@prisma/client', '.prisma'],
+  //   },
+  //   devProxy: {
+  //     '/api': {
+  //       target: 'http://192.168.1.62:3000', 
+  //       changeOrigin: true,
+  //     },
+  //   }
+  // }
 })
