@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: false },
@@ -12,15 +13,10 @@ export default defineNuxtConfig({
     download: true,
     inject: true
   },
-  // nitro : {
-  //   externals: {
-  //     external: ['@prisma/client', '.prisma'],
-  //   },
-  //   devProxy: {
-  //     '/api': {
-  //       target: 'http://192.168.1.62:3000', 
-  //       changeOrigin: true,
-  //     },
-  //   }
-  // }
+//  nitro: {
+//     externals: {
+//       external: ['@prisma/client', '.prisma'],
+//     },
+//     preset: 'node-server'
+//   }
 })

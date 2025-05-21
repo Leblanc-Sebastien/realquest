@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "build:android": "nuxi generate && npx cap copy && npx cap open android"
+    "build:android": "nuxi generate && npx cap copy && npx cap open android",
+    "start": "node .output/server/index.mjs"
   },
   "engines": {
     "node": "20.x"
