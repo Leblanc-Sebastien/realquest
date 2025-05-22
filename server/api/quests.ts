@@ -4,11 +4,11 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
-  const user = await prisma.user.findUnique({
+  const quests = await prisma.quest.findMany({
     where: {
-      id: 1, //temporaire
+        userId: 1 //temporaire
     },
   })
 
-  return user
+  return quests
 })
