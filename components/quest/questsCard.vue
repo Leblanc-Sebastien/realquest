@@ -16,7 +16,7 @@
                             v-if="checkedQuests[quest.id]"
                             class="w-3 h-3 text-white"
                             fill="none"
-                            stroke="currentColor"
+                            stroke="currentColor" 
                             stroke-width="3"
                             viewBox="0 0 24 24"
                         >
@@ -45,12 +45,15 @@ const props = defineProps<{
 
 const title = computed(() => {
     if(props.declinaison === 1){
-        return "Quêtes quotidiennes"
+        return "Quêtes uniques"
     }
     else if(props.declinaison === 2){
-        return "Quêtes hebdomadaires"
+        return "Quêtes quotidiennes"
     }
     else if(props.declinaison === 3){
+        return "Quêtes hebdomadaires"
+    }
+    else if(props.declinaison === 4){
         return "Quêtes mensuelles"
     }
 })

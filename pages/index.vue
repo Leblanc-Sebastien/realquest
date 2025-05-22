@@ -5,9 +5,10 @@
     <div v-else>
         <UserSummary :user="userStore.user"/>
         <div class="flex flex-col gap-2">
-            <QuestsCard :declinaison=1 :quests="dailyQuest" :checked-quests="checkedQuests"/>
-            <QuestsCard :declinaison=2 :quests="weeklyQuest" :checked-quests="checkedQuests"/>
-            <QuestsCard :declinaison=3 :quests="monthlyQuest" :checked-quests="checkedQuests"/>
+            <QuestsCard :declinaison=1 :quests="questsStore.noneQuests" :checked-quests="checkedQuests"/>
+            <QuestsCard :declinaison=2 :quests="questsStore.dailyQuests" :checked-quests="checkedQuests"/>
+            <QuestsCard :declinaison=3 :quests="questsStore.weeklyQuests" :checked-quests="checkedQuests"/>
+            <QuestsCard :declinaison=4 :quests="questsStore.monthlyQuests" :checked-quests="checkedQuests"/>
         </div>
         <div class="w-full flex flex-col align-center justify-center mt-[10px]">
             <button class="w-full h-[50px] bg-green-600 rounded-xl text-white text-[1.3em]">Valider</button>
@@ -17,78 +18,21 @@
 <script setup lang="ts">
 import QuestsCard from '~/components/quest/questsCard.vue';
 import UserSummary from '~/components/user/userSummary.vue';
-import type { Quest } from '~/types/Quest';
 import { useUserStore } from '~/stores/useUserStore'
+import { useQuestsStore } from '~/stores/useQuestsStore';
 
 const userStore = useUserStore()
+const questsStore = useQuestsStore()
 
 onMounted(() => {
     userStore.fetchUser()
+    questsStore.fetchQuests()
+    // console.log(questsStore.dailyQuests)
 })
 
-const quests = ref<Quest[]>([{
-    id: 1,
-    title: 'Faire 1h de scream',
-    description: 'Gueuler le plus fort possible',
-    createdAt: '18/05/2025',
-    frequency: 'DAILY',
-    repeat: true,
-    userId: 1,
-    logs: []
-},
-{
-    id: 2,
-    title: 'Faire 1h de sport',
-    description: 'Avoir des bras énormes et secs',
-    createdAt: '18/05/2025',
-    frequency: 'DAILY',
-    repeat: true,
-    userId: 1,
-    logs: []
-},
-{
-    id: 3,
-    title: 'Faire du yoga',
-    description: 'Zen AHUMMMMM',
-    createdAt: '18/05/2025',
-    frequency: 'WEEKLY',
-    repeat: true,
-    userId: 1,
-    logs: []
-},
-{
-    id: 4,
-    title: 'Apprendre le c++',
-    description: 'Personne sait mais c\'est stylé',
-    createdAt: '18/05/2025',
-    frequency: 'WEEKLY',
-    repeat: true,
-    userId: 1,
-    logs: []
-},{
-    id: 5,
-    title: 'Perdre 3 kilos',
-    description: 'Bah maigrir quoi',
-    createdAt: '18/05/2025',
-    frequency: 'MONTHLY',
-    repeat: true,
-    userId: 1,
-    logs: []
-},
-{
-    id: 6,
-    title: 'Faire un ménage complet de la maison',
-    description: 'Tout nettoyer... tout',
-    createdAt: '18/05/2025',
-    frequency: 'MONTHLY',
-    repeat: true,
-    userId: 1,
-    logs: []
-},])
-
-const dailyQuest = computed(() => quests.value.filter((quest) => quest.frequency === 'DAILY'))
-const weeklyQuest = computed(() => quests.value.filter((quest) => quest.frequency === 'WEEKLY'))
-const monthlyQuest = computed(() => quests.value.filter((quest) => quest.frequency === 'MONTHLY'))
+// watch(() => questsStore.dailyQuests, () => {
+//     console.log(questsStore.dailyQuests)
+// }, {immediate: true})
 
 const checkedQuests = reactive<Record<number, boolean>>({})
     
