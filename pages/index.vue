@@ -27,12 +27,8 @@ const questsStore = useQuestsStore()
 onMounted(() => {
     userStore.fetchUser()
     questsStore.fetchQuests()
-    // console.log(questsStore.dailyQuests)
+  
 })
-
-// watch(() => questsStore.dailyQuests, () => {
-//     console.log(questsStore.dailyQuests)
-// }, {immediate: true})
 
 const checkedQuests = reactive<Record<number, boolean>>({})
     
