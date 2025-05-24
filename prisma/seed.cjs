@@ -137,6 +137,9 @@ async function seedQuest(userId){
 async function main() {
   const user = await seedUser()
   const quest = await seedQuest(user.id)
+
+  console.log('✅ User created:', user)
+  console.log('✅ Quest created:', quest)
 }
 
 main()

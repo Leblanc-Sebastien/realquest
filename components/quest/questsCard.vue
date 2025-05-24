@@ -30,10 +30,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { Quest } from '~/types/quest';
+import type { Quest } from '~/types/Quest';
 
 const toggleQuest = (idQuest : number) => {
     props.checkedQuests[idQuest] = !props.checkedQuests[idQuest]
+    console.log(props.checkedQuests)
 }
 
 const props = defineProps<{
