@@ -8,13 +8,13 @@ export default defineEventHandler(async (event) => {
 
   const { userName, password, mail, confirmPassword } = body
   if (!userName) {
-    return createError({ statusCode: 400, statusMessage: 'UserName required' })
-  }else if(!password){
-    return createError({ statusCode: 400, statusMessage: 'Password required' })
+    return createError({ statusCode: 400, statusMessage: 'Pseudo obligatoire !' })
+  }else if(!password ){
+    return createError({ statusCode: 400, statusMessage: 'Password obligatoire !' })
   }else if(!mail){
-    return createError({ statusCode: 400, statusMessage: 'Email required' })
+    return createError({ statusCode: 400, statusMessage: 'Email obligatoire !' })
   }else if(password !== confirmPassword){
-    return createError({ statusCode: 400, statusMessage: 'Password must be identical' })
+    return createError({ statusCode: 400, statusMessage: 'Les passwords doivent être identiques !' })
   }
 
 const existingUser = await prisma.user.findFirst({
@@ -28,9 +28,9 @@ const existingUser = await prisma.user.findFirst({
 
 if (existingUser) {
   if (existingUser.userName === userName) {
-    return createError({ statusCode: 409, statusMessage: 'User already exists' })
+    throw createError({ statusCode: 409, statusMessage: 'Cet Utilisateur existe déjà ...' })
   } else {
-    return createError({ statusCode: 409, statusMessage: 'Mail already exists' })
+    throw createError({ statusCode: 409, statusMessage: 'Ce mail est déjà utilisé ...' })
   }
 }
 
