@@ -22,19 +22,29 @@ import { useUserStore } from '~/stores/useUserStore'
 import { useQuestsStore } from '~/stores/useQuestsStore';
 
 const userStore = useUserStore()
+const authStore = useAuthStore()
 const questsStore = useQuestsStore()
 
-onMounted(() => {
-    userStore.fetchUser()
-    questsStore.fetchQuests()
-    // console.log(questsStore.dailyQuests)
+onMounted(async () => {
+    try{
+        authStore.loadToken()
+        await userStore.fetchUser()
+        console.log('✅ Authentifié !')
+    }
+    catch(err){
+        console.warn('🚫 Non authentifié, redirection...')
+        authStore.clearToken()
+        navigateTo('/login')
+    }
+
+    // questsStore.fetchQuests()
 })
 
-// watch(() => questsStore.dailyQuests, () => {
-//     console.log(questsStore.dailyQuests)
-// }, {immediate: true})
-
 const checkedQuests = reactive<Record<number, boolean>>({})
+
+watch(userStore ,() => {
+    console.log(userStore.user)
+}, {immediate: true})
     
 </script>
 <style scoped></style>
