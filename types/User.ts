@@ -16,6 +16,7 @@ export interface User {
     id : number
     userName : string
     createdAt : string
+    mail: string
     xp : number
     level : number
     title : Title 

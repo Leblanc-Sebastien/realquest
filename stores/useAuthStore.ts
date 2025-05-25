@@ -7,7 +7,6 @@ export const useAuthStore = defineStore('auth', () => {
     const setToken = (newToken : string) => {
         token.value = newToken
         localStorage.setItem('authToken', newToken)
-        console.log(localStorage.getItem('authToken'))
     }
 
     const loadToken = () => {
