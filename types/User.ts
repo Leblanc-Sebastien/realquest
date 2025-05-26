@@ -1,4 +1,4 @@
-import type { Quest, QuestLog } from "./Quest"
+import type { Quest, QuestLog } from "./quest"
 
 export type Title =  
     'NOOB'|

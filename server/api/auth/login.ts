@@ -8,9 +8,8 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     const { userName, password } = body
 
-    if (!userName || !password) {
-        throw createError({ statusCode: 400, message: 'userName and password required' })
-    }
+    if (!userName) throw createError({ statusCode: 400, message: 'Username required' })
+    if (!password) throw createError({ statusCode: 400, message: 'Password required' })
 
     const user = await prisma.user.findUnique({ where: { userName } })
     if (!user) throw createError({ statusCode: 401, message: 'Invalid user' })
@@ -18,7 +17,10 @@ export default defineEventHandler(async (event) => {
     const valid = await bcrypt.compare(password, user.password)
     if (!valid) throw createError({ statusCode: 401, message: 'Invalid password' })
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '7d' })
+    const secret = process.env.JWT_SECRET
+    if (!secret) throw createError({ statusCode: 500, message: 'Server configuration error: JWT_SECRET missing' })
+
+    const token = jwt.sign({ id: user.id }, secret, { expiresIn: '7d' })
 
     return { 
         token,

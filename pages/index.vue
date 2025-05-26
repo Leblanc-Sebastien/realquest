@@ -25,10 +25,13 @@ const userStore = useUserStore()
 const authStore = useAuthStore()
 const questsStore = useQuestsStore()
 
+const checkedQuests = reactive<Record<number, boolean>>({})
+
 onMounted(async () => {
     try{
         authStore.loadToken()
         await userStore.fetchUser()
+        await questsStore.fetchQuests()
         console.log('✅ Authentifié !')
     }
     catch(err){
@@ -36,15 +39,8 @@ onMounted(async () => {
         authStore.clearToken()
         navigateTo('/login')
     }
-
-    // questsStore.fetchQuests()
 })
 
-const checkedQuests = reactive<Record<number, boolean>>({})
-
-watch(userStore ,() => {
-    console.log(userStore.user)
-}, {immediate: true})
     
 </script>
 <style scoped></style>
