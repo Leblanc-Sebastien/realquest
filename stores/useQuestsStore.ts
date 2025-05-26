@@ -1,14 +1,26 @@
 import { defineStore } from "pinia";
-import type { Quest } from "~/types/Quest";
+import type { Quest } from "~/types/quest";
 
 
 export const useQuestsStore = defineStore('quests', () => {
 
+    const authStore = useAuthStore()
     const quests = ref<Quest[]>([])
-
+   
     const fetchQuests = async () => {
+
+        const token = authStore.token  
+        if (!token) {
+            console.warn('🚫 Pas de token dispo pour fetchQuests')
+            throw new Error('No token found huhu')
+        }
+
         try{
-           quests.value = await $fetch('/api/quests') 
+           quests.value = await $fetch('/api/quests', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+           }) 
         }catch(e){
             console.warn('API failed, loading mock quests')
         }  

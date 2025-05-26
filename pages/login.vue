@@ -31,8 +31,10 @@
 import ShowAlerts from '~/components/common/ShowAlerts.vue';
 import LogoTopLayout from '~/components/layout/LogoTopLayout.vue';
 import { StateAlert } from '~/types/alert';
+import type { User } from '~/types/user';
 
-    const authToken = useAuthStore()
+    const authStore = useAuthStore()
+    const userStore = useUserStore()
 
     const userName = ref<string>('')
     const password = ref<string>('')
@@ -60,18 +62,20 @@ import { StateAlert } from '~/types/alert';
     const validateFormLogin = async () => {
         if (userName.value !== '' && password.value !== '' ) {
             try {
-            const res = await $fetch('/api/auth/login', {
-                method: 'POST',
-                body: {
-                userName: userName.value,    
-                password: password.value,
-                }
-            })
-            showAlertTrigger(StateAlert.success, showMessageAlert.value)
-            authToken.setToken(res.token)
-            setTimeout(() => {
-                navigateTo('/');
-            }, 1000);
+                const res = await $fetch('/api/auth/login', {
+                    method: 'POST',
+                    body: {
+                    userName: userName.value,    
+                    password: password.value,
+                    }
+                })
+                authStore.setToken(res.token)
+                userStore.user = res.user               
+                showAlertTrigger(StateAlert.success, showMessageAlert.value)
+
+                setTimeout(() => {
+                    navigateTo('/');
+                }, 1000);
             } catch (err : any) {
                 showAlertTrigger(StateAlert.fail, err?.data?.statusMessage);
             }

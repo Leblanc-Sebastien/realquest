@@ -1,14 +1,18 @@
 import { PrismaClient } from '@prisma/client'
-// import { prisma } from '../utils/prisma'
+import { getUserIdFromToken } from '../utils/auth/getUserIdFromToken'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
+
+  const userId = getUserIdFromToken(event) 
+  console.log('✅ userId:', userId)
+
   const quests = await prisma.quest.findMany({
     where: {
-        userId: 1 //temporaire
+        userId: userId as number
     },
   })
-
+  console.log('📥 API /quests hit')
   return quests
 })
