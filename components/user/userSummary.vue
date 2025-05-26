@@ -9,7 +9,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { User } from '~/types/User';
+import type { User } from '~/types/user';
 
 const props = defineProps<{
     user : User
