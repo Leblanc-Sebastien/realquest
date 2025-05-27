@@ -11,7 +11,7 @@
             <QuestsCard :declinaison=4 :quests="questsStore.monthlyQuests" :checked-quests="checkedQuests"/>
         </div>
         <div class="w-full flex flex-col align-center justify-center mt-[10px]">
-            <button class="w-full h-[50px] bg-green-600 rounded-xl text-white text-[1.3em]">Valider</button>
+            <button class="w-full h-[50px] bg-green-600 rounded-xl text-white text-[1.3em]" @click="validateQuests">Valider</button>
         </div>
     </div>
     </template>
@@ -27,6 +27,10 @@ const questsStore = useQuestsStore()
 
 const checkedQuests = reactive<Record<number, boolean>>({})
 
+watch(checkedQuests, () => {
+    console.log(checkedQuests)
+}, { immediate: true })
+
 onMounted(async () => {
     try{
         authStore.loadToken()
@@ -41,6 +45,45 @@ onMounted(async () => {
     }
 })
 
-    
+const validateQuests = async () => {
+    const questIds = Object.entries(checkedQuests)
+        .filter(([_, isChecked]) => isChecked)
+        .map(([id, _]) => Number(id))
+
+    if (questIds.length === 0) {
+        console.warn('Aucune quête sélectionnée.');
+        return;
+    }
+
+    try {
+        for (const questId of questIds) {
+        const res = await $fetch('/api/quests/validate', {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${authStore.token}`
+            },
+            body: { 
+                questId 
+            },
+        })
+        console.log('✅ Quête validée', res);
+        }
+
+        authStore.loadToken()
+
+        // Recharge les quêtes pour actualiser la liste
+        await questsStore.fetchQuests();
+
+        // Recharge le user pour avoir l'xp et le niveau à jour
+        await userStore.fetchUser();
+
+        // Reset les quêtes cochées
+        Object.keys(checkedQuests).forEach((key) => {
+        checkedQuests[Number(key)] = false;
+        })
+    }
+    catch(err: any){
+        console.error('Erreur lors de la validation des quêtes', err);
+    }
+}   
 </script>
-<style scoped></style>
