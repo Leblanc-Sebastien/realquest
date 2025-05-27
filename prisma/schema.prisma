@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output = "../node_modules/prisma-client"
 }
 
 datasource db {
@@ -41,15 +42,15 @@ enum Frequency {
   MONTHLY
 }
 model Quest {
-  id           Int       @id @default(autoincrement())
-  title        String    @unique
+  id           Int        @id @default(autoincrement())
+  title        String    
   description  String
-  createdAt    DateTime  @default(now())
+  createdAt    DateTime   @default(now())
   scheduledAt  DateTime? 
-  frequency    Frequency @default(NONE) 
-  repeat       Boolean   @default(false) 
+  frequency    Frequency  @default(DAILY) 
+  repeat       Boolean    
   userId       Int
-  user         User @relation(fields: [userId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
   logs         QuestLog[]  
 }
 

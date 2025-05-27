@@ -21,8 +21,8 @@ import UserSummary from '~/components/user/userSummary.vue';
 import { useUserStore } from '~/stores/useUserStore'
 import { useQuestsStore } from '~/stores/useQuestsStore';
 
-const userStore = useUserStore()
 const authStore = useAuthStore()
+const userStore = useUserStore()
 const questsStore = useQuestsStore()
 
 const checkedQuests = reactive<Record<number, boolean>>({})
