@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from 'prisma-client'
 import { getUserIdFromToken } from '../utils/auth/getUserIdFromToken'
 
-const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
+  const prisma = new PrismaClient()
 
   const userId = getUserIdFromToken(event) 
   console.log('✅ userId:', userId)

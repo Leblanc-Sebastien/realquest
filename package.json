@@ -12,7 +12,7 @@
     "start": "node .output/server/index.mjs"
   },
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "dependencies": {
     "@capacitor/android": "^7.2.0",
@@ -31,6 +31,8 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.21",
+    "@iconify-json/mdi": "^1.2.3",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@types/jsonwebtoken": "^9.0.9",
     "prisma": "^6.8.2",

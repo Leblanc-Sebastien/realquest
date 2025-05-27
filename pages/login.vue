@@ -77,7 +77,7 @@ import type { User } from '~/types/user';
                     navigateTo('/');
                 }, 1000);
             } catch (err : any) {
-                showAlertTrigger(StateAlert.fail, err?.data?.statusMessage);
+                showAlertTrigger(StateAlert.fail, err?.data?.statusMessage)
             }
         }
     };
