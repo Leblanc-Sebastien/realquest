@@ -1,4 +1,5 @@
 import { PrismaClient } from "prisma-client"
+import { levelConfig } from "~/utils/levelConfig"
 
 export default defineEventHandler(async (event) => {
 
@@ -42,12 +43,25 @@ export default defineEventHandler(async (event) => {
         break
     }
 
+    const currentUser = await prisma.user.findUnique({
+        where: { id: userId }
+    })
+    if (!currentUser) throw createError({ statusCode: 404, statusMessage: 'Utilisateur introuvable' })
+
+    const newXp = (currentUser.xp || 0) + xpToAdd
+
+    const newLevel = levelConfig.slice().reverse().find(config => newXp >= config.minXp) || levelConfig[0]
+
+
     const updatedUser = await prisma.user.update({
         where : {
             id : userId
         },
         data : {
-            xp : {increment : xpToAdd}
+            // xp : {increment : xpToAdd}
+            xp : newXp,
+            level : newLevel.level,
+            title: newLevel.title
         }
     })
 
