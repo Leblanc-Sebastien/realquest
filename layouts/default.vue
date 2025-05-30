@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen  overflow-x-hidden">
     <header class="relative flex justify-center items-center px-4 py-3">
-        <h1 class="text-[1.7em] font-bold text-gray-800">RealQuest</h1>
+        <h1 class="text-[1.7em] font-bold text-text">RealQuest</h1>
         <div class="absolute right-4 flex justify-center items-center">
             <BurgerMenu v-if="isConnected"/>
         </div>

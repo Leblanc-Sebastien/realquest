@@ -20,10 +20,10 @@ const icon = ref<string>('')
 const classStyle = computed(() : String => { 
     if(props.state == StateAlert.success ){
         icon.value = "material-symbols:swords"
-        return "flex items-center justify-center gap-4 flex-row bg-green-400 w-full mt-[5px] rounded p-[10px] text-gray-800"
+        return "flex items-center justify-center gap-4 flex-row bg-success w-full mt-[5px] rounded p-[10px] text-text"
     }else{
         icon.value = "material-symbols:shield"
-        return "flex items-center justify-center gap-4 flex-row bg-red-400 w-full mt-[5px] rounded p-[10px] text-gray-800"
+        return "flex items-center justify-center gap-4 flex-row bg-danger w-full mt-[5px] rounded p-[10px] text-text"
     }
 })
 
