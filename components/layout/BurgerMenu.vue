@@ -18,16 +18,17 @@
         class="fixed top-0 left-0 h-full w-64 bg-background z-50 shadow-lg p-6"
       >
         <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg font-bold">Menu</h2>
+          <h2 class="text-lg font-bold text-text">RealQuest</h2>
           <button @click="close">
             <Icon name="mdi:close" size="24" class="text-gray-600" />
           </button>
         </div>
 
         <ul class="space-y-4">
-          <li><NuxtLink to="/" class="text-gray-700 hover:text-purple-700">Accueil</NuxtLink></li>
-          <li><NuxtLink to="/profile" class="text-gray-700 hover:text-purple-700">Profil</NuxtLink></li>
-          <li><NuxtLink to="/quests" class="text-gray-700 hover:text-purple-700">Mes quêtes</NuxtLink></li>
+          <li><NuxtLink to="/" class="text-gray-700 hover:text-purple-700" @click="close">Accueil</NuxtLink></li>
+          <li><NuxtLink to="/profile" class="text-gray-700 hover:text-purple-700" @click="close">Profil</NuxtLink></li>
+          <li><NuxtLink to="/quests" class="text-gray-700 hover:text-purple-700" @click="close">Mes quêtes</NuxtLink></li>
+          <li><NuxtLink class="text-danger" @click="clearToken">Se deconnecter</NuxtLink></li>
         </ul>
       </div>
     </transition>
@@ -35,11 +36,24 @@
 </template>
 
 <script setup>
+
+const authStore = useAuthStore()
+const userStore = useUserStore()
+
 const open = ref(false)
 
-function close() {
+const close = () => {
   open.value = false
 }
+
+const clearToken = () => {
+  authStore.clearToken()
+  userStore.user = null 
+  navigateTo('/login') 
+  close() 
+}
+
+
 </script>
 
 <style scoped>
