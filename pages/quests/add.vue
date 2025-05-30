@@ -2,13 +2,13 @@
     <LogoTopLayout title="Ajouter une quête :">
         <template #content>
             <form @submit.prevent="validateFormQuest" class="w-full">
-                <input type="text" required minlength="3" v-model="title" placeholder="Titre" class="w-full p-2 border mb-2 text-gray-800">
-                <input type="text" required minlength="3" v-model="description" placeholder="Description" class="w-full p-2 border mb-2 text-gray-800">
-                <select v-model="selectedFrequency" required placeholder="Frequence" class="w-full p-2 border mb-2 text-gray-800">
+                <input type="text" required minlength="3" v-model="title" placeholder="Titre" class="w-full p-2 border mb-2 text-text">
+                <input type="text" required minlength="3" v-model="description" placeholder="Description" class="w-full p-2 border mb-2 text-text">
+                <select v-model="selectedFrequency" required placeholder="Frequence" class="w-full p-2 border mb-2 text-text">
                     <option disabled :value="null">-- Choisissez une fréquence --</option>
                     <option v-for="(frequency, key) in frequencies" :value="key" :key="key">{{ frequency }}</option>
                 </select>
-                 <button type="submit" class="bg-green-600 text-white p-2 rounded w-full">Créer une quête !</button> 
+                 <button type="submit" class="bg-success text-white p-2 rounded w-full">Créer une quête !</button> 
             </form>
             <ShowAlerts v-if="showAlert" :message="showMessageAlert" :state='showStateAlert' />
         </template>

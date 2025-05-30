@@ -2,16 +2,19 @@
     <div class="userSummaryContainer  flex flex-col justify-center items-center p-3">
         <img class="h-32" :src="`/avatars/${slugFromTitle(user.title)}.png`" />
         <h1 class="text-[1.2em]">{{ user.userName }} - {{ user.title }}</h1>
-        <div class="xp bg-gray-300 h-[15px] w-[300px] rounded-xl ">
-            <div class="bg-blue-300 w-[150px] h-[15px] rounded-xl"></div>
+        <div class="relative w-full h-4 bg-gray-300 rounded">
+            <div class="absolute top-0 left-0 h-4 bg-bar rounded" :style="{ width: `${xpProgress.percentage}%` }"></div>
         </div>
-        <span>{{ user.xp }} XP</span>
+            <p class="text-sm mt-1 text-gray-600">{{ xpProgress.current }} / {{ xpProgress.needed }} XP</p>
     </div>
 </template>
 <script setup lang="ts">
 import type { User } from '~/types/user';
 
-const props = defineProps<{
+const userStore = useUserStore()
+const xpProgress = computed(() => getXpProgress(userStore.user?.xp || 0))
+
+defineProps<{
     user : User
 }>()
 

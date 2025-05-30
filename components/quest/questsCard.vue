@@ -10,7 +10,7 @@
                     @change="toggleQuest(quest.id)"
                     class="peer hidden"
                     />
-                    <div class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-transparent peer-checked:bg-emerald-400 flex items-center justify-center transition">
+                    <div class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-transparent peer-checked:bg-success flex items-center justify-center transition">
                     <!-- Check visible seulement si coché -->
                         <svg
                             v-if="checkedQuests[quest.id]"

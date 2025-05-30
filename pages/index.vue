@@ -11,7 +11,7 @@
             <QuestsCard :declinaison=4 :quests="questsStore.monthlyQuests" :checked-quests="checkedQuests"/>
         </div>
         <div class="w-full flex flex-col align-center justify-center mt-[10px]">
-            <button class="w-full h-[50px] bg-green-600 rounded-xl text-white text-[1.3em]" @click="validateQuests">Valider</button>
+            <button class="w-full h-[50px] bg-success rounded-xl text-white text-[1.3em]" @click="validateQuests">Valider</button>
         </div>
     </div>
     </template>

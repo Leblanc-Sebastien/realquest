@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="open = true" class="p-2 focus:outline-none flex justify-center items-center">
-      <Icon name="mdi:menu" size="28" class="text-gray-800" />
+      <Icon name="mdi:menu" size="28" class="text-text" />
     </button>
 
     <transition name="fade">
@@ -15,7 +15,7 @@
     <transition name="slide">
       <div
         v-if="open"
-        class="fixed top-0 left-0 h-full w-64 bg-white z-50 shadow-lg p-6"
+        class="fixed top-0 left-0 h-full w-64 bg-background z-50 shadow-lg p-6"
       >
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-lg font-bold">Menu</h2>
