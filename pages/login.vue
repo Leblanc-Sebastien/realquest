@@ -3,7 +3,7 @@
         <template #content>  
         <NuxtLink to="/register" class="text-[0.8em] pb-[15px] text-blue-800">Je n'ai pas encore de compte ...</NuxtLink>
          <form @submit.prevent="validateFormLogin" class="w-full">
-            <input type="text" v-model="userName" placeholder="Nom d'utilisateur" class="w-full p-2 border mb-2 text-gray-800" />
+            <input type="text" v-model="userName" placeholder="Nom d'utilisateur" class="w-full p-2 border mb-2 text-text" />
              <div class="relative w-full mb-2">
                 <input
                     required
@@ -11,7 +11,7 @@
                     :type="showPassword ? 'text' : 'password'"
                     v-model="password"
                     placeholder="Mot de passe"
-                    class="w-full p-2 border border-gray-300 rounded text-gray-800"
+                    class="w-full p-2 border border-gray-300 rounded text-text"
                     />
                     <button
                     type="button"
@@ -21,7 +21,7 @@
                 <Icon :name="showPassword ? 'mdi:eye-off' : 'mdi:eye'" class="w-5 h-5" />
                 </button>
             </div>
-            <button type="submit" class="bg-green-600 text-white p-2 rounded w-full">Se connecter</button> 
+            <button type="submit" class="bg-success text-white p-2 rounded w-full">Se connecter</button> 
             </form>
             <ShowAlerts v-if="showAlert" :message="showMessageAlert" :state='showStateAlert' />
        </template>
