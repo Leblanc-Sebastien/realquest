@@ -12,7 +12,8 @@ export default {
         danger : "#ce5224",
         background: "#f8f9fb",
         surface: "#f7f8fb",
-        bar: "#77bfcc"
+        bar: "#77bfcc",
+        evidence: "#e8a650"
       }
     },
   },
