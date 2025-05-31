@@ -50,7 +50,7 @@ model Quest {
   frequency    Frequency  @default(DAILY) 
   repeat       Boolean    
   userId       Int
-  user         User       @relation(fields: [userId], references: [id])
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   logs         QuestLog[]  
 }
 
@@ -59,7 +59,7 @@ model QuestLog {
   questId       Int
   quest         Quest       @relation(fields: [questId], references: [id])
   userId        Int
-  user          User        @relation(fields: [userId], references: [id]) 
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   completedAt   DateTime    @default(now())
 }
 

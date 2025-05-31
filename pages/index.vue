@@ -1,89 +1,107 @@
 <template>
-    <p v-if="userStore.user === null" class="text-center text-gray-500 text-lg mt-10">
-        Chargement du héros...
-    </p>
-    <div v-else>
-        <UserSummary :user="userStore.user"/>
-        <div class="flex flex-col gap-2">
-            <QuestsCard :declinaison=1 :quests="questsStore.noneQuests" :checked-quests="checkedQuests"/>
-            <QuestsCard :declinaison=2 :quests="questsStore.dailyQuests" :checked-quests="checkedQuests"/>
-            <QuestsCard :declinaison=3 :quests="questsStore.weeklyQuests" :checked-quests="checkedQuests"/>
-            <QuestsCard :declinaison=4 :quests="questsStore.monthlyQuests" :checked-quests="checkedQuests"/>
-        </div>
-        <div class="w-full flex flex-col align-center justify-center mt-[10px]">
-            <button class="w-full h-[50px] bg-success rounded-xl text-white text-[1.3em]" @click="validateQuests">Valider</button>
-        </div>
+  <p
+    v-if="userStore.user === null"
+    class="text-center text-gray-500 text-lg mt-10"
+  >
+    Chargement du héros...
+  </p>
+  <div v-else>
+    <UserSummary :user="userStore.user" />
+    <div class="flex flex-col gap-2">
+      <QuestsCard
+        :declinaison="1"
+        :quests="questsStore.noneQuests"
+        :checked-quests="checkedQuests"
+      />
+      <QuestsCard
+        :declinaison="2"
+        :quests="questsStore.dailyQuests"
+        :checked-quests="checkedQuests"
+      />
+      <QuestsCard
+        :declinaison="3"
+        :quests="questsStore.weeklyQuests"
+        :checked-quests="checkedQuests"
+      />
+      <QuestsCard
+        :declinaison="4"
+        :quests="questsStore.monthlyQuests"
+        :checked-quests="checkedQuests"
+      />
     </div>
-    </template>
+    <div class="w-full flex flex-col align-center justify-center mt-[10px]">
+      <button
+        class="w-full h-[50px] bg-success rounded-xl text-white text-[1.3em]"
+        @click="validateQuests"
+      >
+        Valider
+      </button>
+    </div>
+  </div>
+</template>
 <script setup lang="ts">
 import QuestsCard from '~/components/quest/questsCard.vue';
 import UserSummary from '~/components/user/userSummary.vue';
-import { useUserStore } from '~/stores/useUserStore'
+import { useUserStore } from '~/stores/useUserStore';
 import { useQuestsStore } from '~/stores/useQuestsStore';
 
-const authStore = useAuthStore()
-const userStore = useUserStore()
-const questsStore = useQuestsStore()
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const questsStore = useQuestsStore();
 
-const checkedQuests = reactive<Record<number, boolean>>({})
-
-watch(checkedQuests, () => {
-    console.log(checkedQuests)
-}, { immediate: true })
+const checkedQuests = reactive<Record<number, boolean>>({});
 
 onMounted(async () => {
-    try{
-        authStore.loadToken()
-        await userStore.fetchUser()
-        await questsStore.fetchQuests()
-        console.log('✅ Authentifié !')
-    }
-    catch(err){
-        console.warn('🚫 Non authentifié, redirection...')
-        authStore.clearToken()
-        navigateTo('/login')
-    }
-})
+  try {
+    authStore.loadToken();
+    await userStore.fetchUser();
+    await questsStore.fetchQuests();
+    console.log('✅ Authentifié !');
+  } catch (err) {
+    console.warn('🚫 Non authentifié, redirection...');
+    authStore.clearToken();
+    navigateTo('/login');
+  }
+});
 
 const validateQuests = async () => {
-    const questIds = Object.entries(checkedQuests)
-        .filter(([_, isChecked]) => isChecked)
-        .map(([id, _]) => Number(id))
+  const questIds = Object.entries(checkedQuests)
+    .filter(([_, isChecked]) => isChecked)
+    .map(([id, _]) => Number(id));
 
-    if (questIds.length === 0) {
-        console.warn('Aucune quête sélectionnée.');
-        return;
+  if (questIds.length === 0) {
+    console.warn('Aucune quête sélectionnée.');
+    return;
+  }
+
+  try {
+    for (const questId of questIds) {
+      const res = await $fetch('/api/quests/validate', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authStore.token}`,
+        },
+        body: {
+          questId,
+        },
+      });
+      console.log('✅ Quête validée', res);
     }
 
-    try {
-        for (const questId of questIds) {
-        const res = await $fetch('/api/quests/validate', {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${authStore.token}`
-            },
-            body: { 
-                questId 
-            },
-        })
-        console.log('✅ Quête validée', res);
-        }
+    authStore.loadToken();
 
-        authStore.loadToken()
+    // Recharge les quêtes pour actualiser la liste
+    await questsStore.fetchQuests();
 
-        // Recharge les quêtes pour actualiser la liste
-        await questsStore.fetchQuests();
+    // Recharge le user pour avoir l'xp et le niveau à jour
+    await userStore.fetchUser();
 
-        // Recharge le user pour avoir l'xp et le niveau à jour
-        await userStore.fetchUser();
-
-        // Reset les quêtes cochées
-        Object.keys(checkedQuests).forEach((key) => {
-        checkedQuests[Number(key)] = false;
-        })
-    }
-    catch(err: any){
-        console.error('Erreur lors de la validation des quêtes', err);
-    }
-}   
+    // Reset les quêtes cochées
+    Object.keys(checkedQuests).forEach((key) => {
+      checkedQuests[Number(key)] = false;
+    });
+  } catch (err: any) {
+    console.error('Erreur lors de la validation des quêtes', err);
+  }
+};
 </script>
