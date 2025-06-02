@@ -95,12 +95,9 @@ onMounted(async () => {
 
   try {
     await myQuestsStore.fetchMyQuests();
-    console.log(myQuestsStore.myQuests);
   } catch (err) {
     console.error('Erreur lors du chargement des quêtes :', err);
   }
-
-  console.log('✅ Authentifié et quêtes chargées !');
 });
 
 const deleteQuest = async () => {

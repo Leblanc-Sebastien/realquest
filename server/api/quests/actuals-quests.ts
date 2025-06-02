@@ -14,7 +14,6 @@ export default defineEventHandler(async (event) => {
 
   const userId = getUserIdFromToken(event);
   const now = new Date();
-  console.log('✅ userId:', userId);
 
   const quests = await prisma.quest.findMany({
     where: {
@@ -62,6 +61,5 @@ export default defineEventHandler(async (event) => {
       ],
     },
   });
-  console.log('📥 API /quests hit');
   return quests;
 });

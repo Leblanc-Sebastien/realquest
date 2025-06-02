@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
   const userId = getUserIdFromToken(event);
 
   try {
-    await console.log('✅ Token userId:', userId);
     const deleteUser = await prisma.user.delete({
       where: {
         id: userId as number,

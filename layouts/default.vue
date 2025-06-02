@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen  overflow-x-hidden">
+  <div class="min-h-screen overflow-x-hidden">
     <header class="relative flex justify-center items-center px-4 py-3">
-        <h1 class="text-[1.7em] font-bold text-text">RealQuest</h1>
-        <div class="absolute right-4 flex justify-center items-center">
-            <BurgerMenu v-if="isConnected"/>
-        </div>
+      <h1 class="text-[1.7em] font-bold text-text">RealQuest</h1>
+      <div class="absolute right-4 flex justify-center items-center">
+        <BurgerMenu v-if="isConnected" />
+      </div>
     </header>
     <main class="p-6">
       <slot />
@@ -12,17 +12,11 @@
   </div>
 </template>
 <script setup lang="ts">
-    import BurgerMenu from '~/components/layout/BurgerMenu.vue';
-  
-    const userStore = useUserStore()
+import BurgerMenu from '~/components/layout/BurgerMenu.vue';
 
-    const isConnected = computed<boolean>(() => {
-       return !!userStore.user
-    })
+const userStore = useUserStore();
 
-    watch(isConnected, () => {
-      console.log(isConnected.value)
-    })
-
+const isConnected = computed<boolean>(() => {
+  return !!userStore.user;
+});
 </script>
-

@@ -85,7 +85,6 @@ const validateQuests = async () => {
           questId,
         },
       });
-      console.log('✅ Quête validée', res);
     }
 
     authStore.loadToken();

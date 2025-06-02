@@ -19,7 +19,6 @@ async function seedUser() {
 
 async function main() {
   const user = await seedUser();
-  console.log('✅ User created:', user);
 }
 
 main()
