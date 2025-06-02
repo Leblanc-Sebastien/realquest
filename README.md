@@ -1,77 +1,25 @@
-# Nuxt Minimal Starter
+1️⃣ Prérequis
+Avant de commencer, assure-toi d’avoir les outils suivants installés sur ta machine : - Node.js (v18 ou supérieur) - Git
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+2️⃣ Installer les dépendances
 
-## Setup
+    - npm install
 
-Make sure to install dependencies:
+3️⃣ Configurer les variables d’environnement
+Copie le fichier .env.example en .env et configure les variables si nécessaire :
 
-```bash
-# npm
-npm install
+    - cp .env.example .env
 
-# pnpm
-pnpm install
+4️⃣ Préparer la base de données
+Générer et appliquer les migrations Prisma + créer la base de données :
 
-# yarn
-yarn install
+    - npx prisma migrate reset --skip-seed
 
-# bun
-bun install
-```
+5️⃣ Lancer le projet en local
 
-## Development Server
+    - npm run dev
 
-Start the development server on `http://localhost:3000`:
+    Le projet est maintenant disponible sur :
+    🌐 http://localhost:3000
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-# realquest
-RealQuest helps you generate and complete real-life daily quests.
+➡️ Enjoy !

@@ -38,6 +38,12 @@
       </button>
     </div>
   </div>
+  <button
+    @click="navigateTo('/quests/add')"
+    class="fixed bottom-6 right-6 bg-evidence text-white rounded-full w-14 h-14 flex items-center justify-center text-3xl shadow-lg"
+  >
+    +
+  </button>
 </template>
 <script setup lang="ts">
 import QuestsCard from '~/components/quest/questsCard.vue';
