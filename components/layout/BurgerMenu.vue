@@ -42,7 +42,7 @@
           </li>
           <li>
             <NuxtLink
-              to="/quests/quests"
+              to="/quests/all-created-quests"
               class="text-gray-700 hover:text-purple-700"
               @click="close"
               >Mes quêtes</NuxtLink
