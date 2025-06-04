@@ -60,6 +60,7 @@
 </template>
 
 <script setup>
+import { navigateTo } from 'nuxt/app';
 const authStore = useAuthStore();
 const userStore = useUserStore();
 

@@ -4,23 +4,18 @@
       <form @submit.prevent="validateFormQuest" class="w-full">
         <input
           type="text"
-          required
-          minlength="3"
           v-model="title"
           placeholder="Titre"
           class="w-full p-2 border mb-2 text-text"
         />
         <input
           type="text"
-          required
-          minlength="3"
           v-model="description"
           placeholder="Description"
           class="w-full p-2 border mb-2 text-text"
         />
         <select
           v-model="selectedFrequency"
-          required
           placeholder="Frequence"
           class="w-full p-2 border mb-2 text-text"
         >
@@ -91,7 +86,9 @@ const showAlertTrigger = (state: StateAlert, message: string) => {
 const validateFormQuest = async () => {
   if (
     title.value !== '' &&
+    title.value.length >= 3 &&
     description.value !== '' &&
+    description.value.length >= 3 &&
     selectedFrequency.value !== null
   ) {
     try {
@@ -116,6 +113,18 @@ const validateFormQuest = async () => {
       }, 1000);
     } catch (err: any) {
       showAlertTrigger(StateAlert.fail, err?.data?.statusMessage);
+    }
+  } else {
+    if (title.value == '') {
+      showAlertTrigger(StateAlert.fail, 'Votre titre est manquant !');
+    } else if (title.value.length < 3) {
+      showAlertTrigger(StateAlert.fail, 'Votre titre est trop court !');
+    } else if (description.value == '') {
+      showAlertTrigger(StateAlert.fail, 'Description manquante !');
+    } else if (description.value.length < 3) {
+      showAlertTrigger(StateAlert.fail, 'Description trop courte !');
+    } else if (selectedFrequency.value == null) {
+      showAlertTrigger(StateAlert.fail, 'Choisissez une frequence !');
     }
   }
 };
