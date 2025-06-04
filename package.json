@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "build:android": "nuxi generate && npx cap copy && npx cap open android",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "test": "npx vitest"
   },
   "engines": {
     "node": "22.x"
@@ -34,10 +35,14 @@
   "devDependencies": {
     "@iconify-json/material-symbols": "^1.2.21",
     "@iconify-json/mdi": "^1.2.3",
+    "@nuxt/test-utils": "^3.19.1",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@types/jsonwebtoken": "^9.0.9",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^17.6.1",
     "prisma": "^6.8.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "vitest": "^3.2.0"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"
