@@ -1,7 +1,7 @@
-import { Title } from 'prisma-client'
+import { Title } from '~/types/title';
 
 export const levelConfig = [
-  { level: 1, minXp: 0, title: Title.NOOB },
+  { level: 1, minXp: 0, Title: Title.NOOB },
   { level: 2, minXp: 50, title: Title.PORTE_CHAUSSETTES },
   { level: 3, minXp: 150, title: Title.RODEUR_TIMIDE },
   { level: 4, minXp: 200, title: Title.DISCIPLINAIRE_DEBUTANT },
@@ -10,5 +10,5 @@ export const levelConfig = [
   { level: 7, minXp: 600, title: Title.TEMPLIER_DE_L_EFFORT },
   { level: 8, minXp: 800, title: Title.ELU_DES_HABITUDES },
   { level: 9, minXp: 1000, title: Title.PALADIN_DU_QUOTIDIEN },
-  { level: 10, minXp: 1500, title: Title.ARCHIMAGE_DE_LA_CONSTANCE }
-]
+  { level: 10, minXp: 1500, title: Title.ARCHIMAGE_DE_LA_CONSTANCE },
+];
