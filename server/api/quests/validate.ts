@@ -1,5 +1,5 @@
 import { PrismaClient } from 'prisma-client';
-import { levelConfig } from '@/utils/levelConfig';
+import { levelConfig } from '~/utils/levelConfig';
 
 export default defineEventHandler(async (event) => {
   const prisma = new PrismaClient();

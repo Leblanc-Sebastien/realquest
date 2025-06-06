@@ -36,7 +36,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Quest } from '@/types/quest';
+import type { Quest } from '~/types/quest';
 
 const toggleQuest = (idQuest: number) => {
   props.checkedQuests[idQuest] = !props.checkedQuests[idQuest];

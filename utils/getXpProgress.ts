@@ -1,4 +1,4 @@
-import { levelConfig } from '@/utils/levelConfig';
+import { levelConfig } from '~/utils/levelConfig';
 
 export const getXpProgress = (xp: number) => {
   const currentLevel = levelConfig.findLast((lvl) => xp >= lvl.minXp);

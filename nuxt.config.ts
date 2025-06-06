@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: false },
-  css: ['@/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css'],
   modules: [
     '@nuxt/eslint',
     '@nuxt/icon',
@@ -25,6 +25,9 @@ export default defineNuxtConfig({
     display: 'swap',
     download: true,
     inject: true,
+  },
+  components: {
+    dirs: [],
   },
   //  nitro: {
   //     externals: {

@@ -6,7 +6,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { StateAlert } from '@/types/alert';
+import { StateAlert } from '~/types/alert';
 
 const props = defineProps<{
   message: string;

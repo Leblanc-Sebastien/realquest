@@ -3,7 +3,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import Modal from '@/components/common/Modal.vue';
+import Modal from '~/components/common/Modal.vue';
 
 describe('Modal.vue', () => {
   it('affiche le titre, le contenu et le texte de confirmation', async () => {

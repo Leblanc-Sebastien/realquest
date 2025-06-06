@@ -1,15 +1,15 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import UserSummary from '@/components/user/UserSummary.vue';
-import type { Title, UserTitle } from '@/types/User';
+import UserSummary from '~/components/user/UserSummary.vue';
+import type { Title, UserTitle } from '~/types/User';
 
-vi.mock('@/stores/useUserStore', () => ({
+vi.mock('~/stores/useUserStore', () => ({
   useUserStore: () => ({
     user: { xp: 150 },
   }),
 }));
 
-vi.mock('@/utils/getXpProgress', () => ({
+vi.mock('~/utils/getXpProgress', () => ({
   getXpProgress: (xp: number) => ({
     percentage: 75,
     current: xp,

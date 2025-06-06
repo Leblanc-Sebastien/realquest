@@ -2,7 +2,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import Dummy from '@/components/common/Dummy.vue';
+import Dummy from '~/components/common/Dummy.vue';
 
 describe('DummyComponent', () => {
   it('render the component', () => {

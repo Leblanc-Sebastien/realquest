@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import QuestsCard from '@/components/quest/QuestsCard.vue';
-import type { Frequency } from '@/types/quest';
+import QuestsCard from '~/components/quest/QuestsCard.vue';
+import type { Frequency } from '~/types/quest';
 
 describe('QuestChecklist.vue', () => {
   const quests = [

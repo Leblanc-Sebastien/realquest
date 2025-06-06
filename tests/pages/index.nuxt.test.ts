@@ -1,16 +1,16 @@
 import { mount, RouterLinkStub } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import index from '@/pages/index.vue';
+import index from '~/pages/index.vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 
-vi.mock('@/stores/useUserStore', () => ({
+vi.mock('~/stores/useUserStore', () => ({
   useUserStore: () => ({
     user: null,
     fetchUser: vi.fn().mockResolvedValue(undefined),
   }),
 }));
 
-vi.mock('@/stores/useQuestsStore', () => ({
+vi.mock('~/stores/useQuestsStore', () => ({
   useQuestsStore: () => ({
     noneQuests: [],
     dailyQuests: [],
@@ -20,7 +20,7 @@ vi.mock('@/stores/useQuestsStore', () => ({
   }),
 }));
 
-vi.mock('@/stores/useAuthStore', () => ({
+vi.mock('~/stores/useAuthStore', () => ({
   useAuthStore: () => ({
     token: 'fake-token',
     loadToken: vi.fn(),

@@ -69,9 +69,9 @@
   </LogoTopLayout>
 </template>
 <script setup lang="ts">
-import ShowAlerts from '@/components/common/ShowAlerts.vue';
-import LogoTopLayout from '@/components/layout/LogoTopLayout.vue';
-import { StateAlert } from '@/types/alert';
+import ShowAlerts from '~/components/common/ShowAlerts.vue';
+import LogoTopLayout from '~/components/layout/LogoTopLayout.vue';
+import { StateAlert } from '~/types/alert';
 
 const register = ref<string>('Enregistrez-vous');
 

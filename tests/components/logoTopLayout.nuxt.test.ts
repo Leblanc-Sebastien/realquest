@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import LogoTopLayout from '@/components/layout/LogoTopLayout.vue';
+import LogoTopLayout from '~/components/layout/LogoTopLayout.vue';
 
 describe('LogoTopLayout.vue', () => {
   it('affiche le logo, le titre, et le contenu du slot', async () => {
