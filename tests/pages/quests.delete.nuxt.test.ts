@@ -5,7 +5,7 @@ import {
   registerEndpoint,
 } from '@nuxt/test-utils/runtime';
 import MyQuestsPage from '@/pages/quests/all-created-quests.vue'; // adapte le chemin
-import { StateAlert } from '~/types/alert';
+import { StateAlert } from '@/types/alert';
 import { flushPromises } from '@vue/test-utils';
 
 const mockFetchUser = vi.fn();
@@ -14,13 +14,13 @@ const mockClearToken = vi.fn();
 const mockLoadToken = vi.fn();
 const navigateToMock = vi.fn();
 
-vi.mock('~/stores/useUserStore', () => ({
+vi.mock('@/stores/useUserStore', () => ({
   useUserStore: () => ({
     fetchUser: mockFetchUser,
   }),
 }));
 
-vi.mock('~/stores/useMyQuestsStore', () => ({
+vi.mock('@/stores/useMyQuestsStore', () => ({
   useMyQuestsStore: () => ({
     myQuests: [
       { id: 1, title: 'Ma quête 1', frequency: 'DAILY' },
@@ -30,7 +30,7 @@ vi.mock('~/stores/useMyQuestsStore', () => ({
   }),
 }));
 
-vi.mock('~/stores/useAuthStore', () => ({
+vi.mock('@/stores/useAuthStore', () => ({
   useAuthStore: () => ({
     token: 'fake-token',
     loadToken: mockLoadToken,

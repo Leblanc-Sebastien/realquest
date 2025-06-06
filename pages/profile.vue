@@ -81,9 +81,9 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import Modal from '~/components/common/Modal.vue';
-import ShowAlerts from '~/components/common/ShowAlerts.vue';
-import { StateAlert } from '~/types/alert';
+import Modal from '@/components/common/Modal.vue';
+import ShowAlerts from '@/components/common/ShowAlerts.vue';
+import { StateAlert } from '@/types/alert';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();

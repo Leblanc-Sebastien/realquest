@@ -1,4 +1,4 @@
-import { Title } from '~/types/title';
+import { Title } from '@/types/title';
 
 export const levelConfig = [
   { level: 1, minXp: 0, Title: Title.NOOB },

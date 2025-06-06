@@ -16,7 +16,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Quest } from '~/types/quest';
+import type { Quest } from '@/types/quest';
 
 const emit = defineEmits(['openModal']);
 

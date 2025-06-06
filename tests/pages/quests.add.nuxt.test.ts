@@ -7,14 +7,14 @@ import {
 import AddQuestPage from '@/pages/quests/add.vue';
 import { flushPromises } from '@vue/test-utils';
 
-vi.mock('~/stores/useAuthStore', () => ({
+vi.mock('@/stores/useAuthStore', () => ({
   useAuthStore: () => ({
     token: 'fake-token',
     loadToken: vi.fn(),
   }),
 }));
 
-vi.mock('~/stores/useUserStore', () => ({
+vi.mock('@/stores/useUserStore', () => ({
   useUserStore: () => ({
     fetchUser: vi.fn(),
   }),

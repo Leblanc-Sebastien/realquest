@@ -3,13 +3,13 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import Menu from '@/components/layout/BurgerMenu.vue';
 import { mockNuxtImport } from '@nuxt/test-utils/runtime';
 
-vi.mock('~/stores/useAuthStore', () => ({
+vi.mock('@/stores/useAuthStore', () => ({
   useAuthStore: () => ({
     clearToken: vi.fn(),
   }),
 }));
 
-vi.mock('~/stores/useUserStore', () => ({
+vi.mock('@/stores/useUserStore', () => ({
   useUserStore: () => ({
     user: { id: 1 },
   }),

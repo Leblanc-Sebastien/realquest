@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import BurgerMenu from '~/components/layout/BurgerMenu.vue';
+import BurgerMenu from '@/components/layout/BurgerMenu.vue';
 
 const userStore = useUserStore();
 

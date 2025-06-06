@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { Quest } from '~/types/quest';
+import type { Quest } from '@/types/quest';
 
 export const useMyQuestsStore = defineStore('myQuests', () => {
   const authStore = useAuthStore();

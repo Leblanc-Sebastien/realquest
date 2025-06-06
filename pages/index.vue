@@ -46,10 +46,10 @@
   </button>
 </template>
 <script setup lang="ts">
-import QuestsCard from '~/components/quest/QuestsCard.vue';
-import UserSummary from '~/components/user/UserSummary.vue';
-import { useUserStore } from '~/stores/useUserStore';
-import { useQuestsStore } from '~/stores/useQuestsStore';
+import QuestsCard from '@/components/quest/QuestsCard.vue';
+import UserSummary from '@/components/user/UserSummary.vue';
+import { useUserStore } from '@/stores/useUserStore';
+import { useQuestsStore } from '@/stores/useQuestsStore';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();

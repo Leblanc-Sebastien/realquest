@@ -17,8 +17,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { User } from '~/types/user';
-import { UserTitle } from '~/types/user';
+import type { User } from '@/types/user';
+import { UserTitle } from '@/types/user';
 
 const userStore = useUserStore();
 const xpProgress = computed(() => getXpProgress(userStore.user?.xp || 0));

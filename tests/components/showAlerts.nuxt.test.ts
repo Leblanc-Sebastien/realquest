@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import Alert from '~/components/common/ShowAlerts.vue';
-import { StateAlert } from '~/types/alert';
+import Alert from '@/components/common/ShowAlerts.vue';
+import { StateAlert } from '@/types/alert';
 
 describe('ShowAlerts', () => {
   it("affiche le message pour l'état success", async () => {
