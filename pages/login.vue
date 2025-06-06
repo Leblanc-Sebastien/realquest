@@ -47,7 +47,7 @@
 import ShowAlerts from '~/components/common/ShowAlerts.vue';
 import LogoTopLayout from '~/components/layout/LogoTopLayout.vue';
 import { StateAlert } from '~/types/alert';
-import type { User } from '~/types/User';
+import type { User } from '~/types/user';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();

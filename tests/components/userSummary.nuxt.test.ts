@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import UserSummary from '~/components/user/UserSummary.vue';
-import type { Title, UserTitle } from '~/types/User';
+import type { Title, UserTitle } from '~/types/user';
 
 vi.mock('~/stores/useUserStore', () => ({
   useUserStore: () => ({
