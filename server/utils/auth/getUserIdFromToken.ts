@@ -11,7 +11,7 @@ export const getUserIdFromToken = (event: any) => {
   if (!token || !secret) {
     throw new Error('No token or secret');
   }
-
+  // const decoded = jwt.decode(token) as { id: number };
   const decoded = jwt.verify(token, secret) as { id: number };
   console.log('✅ Decoded:', decoded);
 

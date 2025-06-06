@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
       message: 'Utilisateur supprimé avec succès !',
     };
   } catch (err) {
+    console.log(userId);
     console.error('Erreur lors de la suppression du compte :', err);
     throw createError({
       statusCode: 500,
