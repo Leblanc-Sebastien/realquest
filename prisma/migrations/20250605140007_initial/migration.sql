@@ -2,6 +2,8 @@
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "userName" TEXT NOT NULL,
+    "mail" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "xp" INTEGER NOT NULL DEFAULT 0,
     "level" INTEGER NOT NULL DEFAULT 0,
@@ -15,10 +17,10 @@ CREATE TABLE "Quest" (
     "description" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "scheduledAt" DATETIME,
-    "frequency" TEXT NOT NULL DEFAULT 'NONE',
-    "repeat" BOOLEAN NOT NULL DEFAULT false,
+    "frequency" TEXT NOT NULL DEFAULT 'DAILY',
+    "repeat" BOOLEAN NOT NULL,
     "userId" INTEGER NOT NULL,
-    CONSTRAINT "Quest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Quest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -27,9 +29,12 @@ CREATE TABLE "QuestLog" (
     "questId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     "completedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "QuestLog_questId_fkey" FOREIGN KEY ("questId") REFERENCES "Quest" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "QuestLog_questId_fkey" FOREIGN KEY ("questId") REFERENCES "Quest" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "QuestLog_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_userName_key" ON "User"("userName");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_mail_key" ON "User"("mail");
