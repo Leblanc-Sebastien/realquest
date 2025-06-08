@@ -1,48 +1,52 @@
 <template>
-  <div class="w-full max-w-4xl mx-auto p-4">
-    <h1 class="text-2xl font-bold text-text mb-6">Vos Quêtes</h1>
-    <div v-if="myQuestsStore.myQuests.length > 0" class="space-y-4">
-      <details
-        v-for="(quests, freq) in groupedQuests"
-        :key="freq"
-        class="group"
-      >
-        <summary
-          class="cursor-pointer text-lg font-semibold text-text py-2 px-1 transition flex items-center justify-between"
+  <div>
+    <div class="w-full max-w-4xl mx-auto p-4">
+      <h1 class="text-2xl font-bold text-text mb-6">Vos Quêtes</h1>
+      <div v-if="myQuestsStore.myQuests.length > 0" class="space-y-4">
+        <details
+          v-for="(quests, freq) in groupedQuests"
+          :key="freq"
+          class="group"
         >
-          <span>{{ freq }}</span>
-          <span class="flex items-center gap-2">
-            <span class="text-sm text-muted">({{ quests.length }})</span>
-            <Icon
-              name="mdi:chevron-down"
-              class="w-5 h-5 transform transition-transform duration-300 group-open:rotate-180"
-            />
-          </span>
-        </summary>
+          <summary
+            class="cursor-pointer text-lg font-semibold text-text py-2 px-1 transition flex items-center justify-between"
+          >
+            <span>{{ freq }}</span>
+            <span class="flex items-center gap-2">
+              <span class="text-sm text-muted">({{ quests.length }})</span>
+              <Icon
+                name="mdi:chevron-down"
+                class="w-5 h-5 transform transition-transform duration-300 group-open:rotate-180"
+              />
+            </span>
+          </summary>
 
-        <ul class="mt-2 flex flex-col gap-2">
-          <li v-for="quest in quests" :key="quest.id">
-            <QuestCard :quest="quest" @open-modal="openDeleteModal" />
-          </li>
-        </ul>
-      </details>
+          <ul class="mt-2 flex flex-col gap-2">
+            <li v-for="quest in quests" :key="quest.id">
+              <QuestCard :quest="quest" @open-modal="openDeleteModal" />
+            </li>
+          </ul>
+        </details>
+      </div>
+      <p v-else class="text-muted text-center mt-10">
+        Aucune quête disponible.
+      </p>
+      <ShowAlerts
+        v-if="showAlert"
+        :message="showMessageAlert"
+        :state="showStateAlert"
+      />
     </div>
-    <p v-else class="text-muted text-center mt-10">Aucune quête disponible.</p>
-    <ShowAlerts
-      v-if="showAlert"
-      :message="showMessageAlert"
-      :state="showStateAlert"
-    />
+    <Modal
+      :show="deleteModalVisible"
+      title="Suppression du compte"
+      confirm-text="Valider"
+      @confirm="deleteQuest"
+      @cancel="cancelModal"
+    >
+      <p class="text-text">Êtes-vous sur de vouloir supprimer cette quête ?</p>
+    </Modal>
   </div>
-  <Modal
-    :show="deleteModalVisible"
-    title="Suppression du compte"
-    confirm-text="Valider"
-    @confirm="deleteQuest"
-    @cancel="cancelModal"
-  >
-    <p class="text-text">Êtes-vous sur de vouloir supprimer cette quête ?</p>
-  </Modal>
 </template>
 
 <script setup lang="ts">
@@ -60,6 +64,8 @@ const selectedQuestId = ref<number | null>(null);
 const showAlert = ref(false);
 const showMessageAlert = ref('');
 const showStateAlert = ref<StateAlert | undefined>(undefined);
+
+const config = useRuntimeConfig();
 
 const openDeleteModal = (id: number) => {
   selectedQuestId.value = id;
@@ -87,7 +93,7 @@ onMounted(async () => {
   try {
     await userStore.fetchUser();
   } catch (err) {
-    console.warn('🚫 Authentification échouée, redirection...');
+    console.warn('🚫 Authentification échouée, redirection...', err);
     authStore.clearToken();
     navigateTo('/login');
     return;
@@ -102,7 +108,8 @@ onMounted(async () => {
 
 const deleteQuest = async () => {
   try {
-    const res = await $fetch('/api/quests/delete', {
+    await $fetch('/api/quests/delete', {
+      baseURL: config.public.apiBase,
       method: 'POST',
       headers: { Authorization: `Bearer ${authStore.token}` },
       body: { id: selectedQuestId.value },
@@ -110,7 +117,7 @@ const deleteQuest = async () => {
     await handleAlert('success', 'Quête supprimée avec succès !');
     await myQuestsStore.fetchMyQuests();
     deleteModalVisible.value = false;
-  } catch (err: any) {
+  } catch (err) {
     handleAlert('fail', 'Echec de suppression !');
     console.error('Erreur lors de la suppression de la quête :', err);
   }

@@ -5,6 +5,8 @@ export const useQuestsStore = defineStore('quests', () => {
   const authStore = useAuthStore();
   const quests = ref<Quest[]>([]);
 
+  const config = useRuntimeConfig();
+
   const fetchQuests = async () => {
     const token = authStore.token;
     if (!token) {
@@ -14,12 +16,13 @@ export const useQuestsStore = defineStore('quests', () => {
 
     try {
       quests.value = await $fetch('/api/quests/actuals-quests', {
+        baseURL: config.public.apiBase,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-    } catch (e) {
-      console.warn('API failed, loading mock quests');
+    } catch (err) {
+      console.warn('API failed, loading mock quests', err);
     }
   };
 

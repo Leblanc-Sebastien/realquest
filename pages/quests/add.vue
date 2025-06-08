@@ -64,6 +64,8 @@ const showAlert = ref<boolean>(false);
 const showMessageAlert = ref<string>('');
 const showStateAlert = ref<StateAlert | undefined>(undefined);
 
+const config = useRuntimeConfig();
+
 const repeatOrNot = computed(() => {
   return selectedFrequency.value === 'NONE' ? false : true;
 });
@@ -95,7 +97,8 @@ const validateFormQuest = async () => {
       authStore.loadToken();
       await userStore.fetchUser();
 
-      const res = await $fetch('/api/quests/add', {
+      await $fetch('/api/quests/add', {
+        baseURL: config.public.apiBase,
         method: 'POST',
         headers: {
           Authorization: `Bearer ${authStore.token}`,
