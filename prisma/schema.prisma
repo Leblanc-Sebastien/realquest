@@ -3,10 +3,14 @@ generator client {
   output = "../node_modules/prisma-client"
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url      = env("DATABASE_URL")
+// }
+
 datasource db {
-  provider = "sqlite"
-  // provider = "postgresql"
-  url      = env("DATABASE_URL")
+ provider = "postgresql"
+ url      = env("DATABASE_URL")
 }
 
 enum Title {
