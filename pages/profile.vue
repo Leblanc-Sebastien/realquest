@@ -98,6 +98,8 @@ const showAlert = ref<boolean>(false);
 const showMessageAlert = ref<string>('');
 const showStateAlert = ref<StateAlert | undefined>(undefined);
 
+const config = useRuntimeConfig();
+
 onMounted(async () => {
   try {
     authStore.loadToken();
@@ -120,6 +122,7 @@ const cancelModal = () => {
 const deleteAccount = async () => {
   try {
     await $fetch('api/user/delete', {
+      baseURL: config.public.apiBase,
       method: 'POST',
       headers: {
         Authorization: `Bearer ${authStore.token}`,
@@ -141,7 +144,8 @@ const formVisible = () => {
 
 const editUser = async () => {
   try {
-    const res = await $fetch('/api/user/edit', {
+    await $fetch('/api/user/edit', {
+      baseURL: config.public.apiBase,
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${authStore.token}`,

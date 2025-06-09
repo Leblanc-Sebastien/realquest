@@ -29,10 +29,9 @@ export default defineNuxtConfig({
   components: {
     dirs: [],
   },
-  //  nitro: {
-  //     externals: {
-  //       external: ['@prisma/client', '.prisma'],
-  //     },
-  //     preset: 'node-server'
-  //   }
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE,
+    },
+  },
 });

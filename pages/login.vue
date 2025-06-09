@@ -47,7 +47,6 @@
 import ShowAlerts from '~/components/common/ShowAlerts.vue';
 import LogoTopLayout from '~/components/layout/LogoTopLayout.vue';
 import { StateAlert } from '~/types/alert';
-import type { User } from '~/types/user';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -59,6 +58,8 @@ const showPassword = ref<boolean>(false);
 const showAlert = ref<boolean>(false);
 const showMessageAlert = ref<string>('');
 const showStateAlert = ref<StateAlert | undefined>(undefined);
+
+const config = useRuntimeConfig();
 
 const showAlertTrigger = (state: StateAlert, message: string) => {
   if (state === StateAlert.success) {
@@ -79,6 +80,7 @@ const validateFormLogin = async () => {
   if (userName.value !== '' && password.value !== '') {
     try {
       const res = await $fetch('/api/auth/login', {
+        baseURL: config.public.apiBase,
         method: 'POST',
         body: {
           userName: userName.value,

@@ -6,6 +6,8 @@ export const useUserStore = defineStore('user', () => {
 
   const authStore = useAuthStore();
 
+  const config = useRuntimeConfig();
+
   const fetchUser = async (): Promise<void> => {
     const token = authStore.token;
     if (!token) {
@@ -14,6 +16,7 @@ export const useUserStore = defineStore('user', () => {
 
     try {
       user.value = (await $fetch('/api/me', {
+        baseURL: config.public.apiBase,
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -86,6 +86,8 @@ const showAlert = ref<boolean>(false);
 const showMessageAlert = ref<string>('');
 const showStateAlert = ref<StateAlert | undefined>(undefined);
 
+const config = useRuntimeConfig();
+
 const showAlertTrigger = (state: StateAlert, message: string) => {
   if (state === StateAlert.success) {
     showMessageAlert.value = 'Votre compte à été créé !';
@@ -108,7 +110,8 @@ const validateFormRegister = async () => {
     password.value === confirmPassword.value
   ) {
     try {
-      const res = await $fetch('/api/auth/register', {
+      await $fetch('/api/auth/register', {
+        baseURL: config.public.apiBase,
         method: 'POST',
         body: {
           userName: userName.value,
