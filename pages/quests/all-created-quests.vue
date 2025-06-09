@@ -54,6 +54,8 @@ import { computed } from 'vue';
 import Modal from '~/components/common/Modal.vue';
 import ShowAlerts from '~/components/common/ShowAlerts.vue';
 import { StateAlert } from '~/types/alert';
+import QuestCard from '~/components/quest/QuestCard.vue';
+
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const myQuestsStore = useMyQuestsStore();
