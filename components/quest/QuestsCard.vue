@@ -6,9 +6,9 @@
         <label class="inline-flex items-center cursor-pointer">
           <input
             type="checkbox"
+            class="peer hidden"
             :checked="checkedQuests[quest.id] || false"
             @change="toggleQuest(quest.id)"
-            class="peer hidden"
           />
           <div
             class="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-transparent peer-checked:bg-success flex items-center justify-center transition"

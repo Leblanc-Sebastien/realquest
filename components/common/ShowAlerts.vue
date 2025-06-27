@@ -14,15 +14,20 @@ const props = defineProps<{
 }>();
 
 const showAlert = ref<boolean>(false);
-const icon = ref<string>('');
 
-const classStyle = computed((): String => {
+const classStyle = computed((): string => {
   if (props.state == StateAlert.success) {
-    icon.value = 'material-symbols:swords';
     return 'flex items-center justify-center gap-4 flex-row bg-success w-full mt-[5px] rounded p-[10px] text-text';
   } else {
-    icon.value = 'material-symbols:shield';
     return 'flex items-center justify-center gap-4 flex-row bg-danger w-full mt-[5px] rounded p-[10px] text-text';
+  }
+});
+
+const icon = computed((): string => {
+  if (props.state == StateAlert.success) {
+    return 'material-symbols:swords';
+  } else {
+    return 'material-symbols:shield';
   }
 });
 

@@ -9,7 +9,7 @@
       <div
         class="absolute top-0 left-0 h-4 bg-bar rounded"
         :style="{ width: `${xpProgress.percentage}%` }"
-      ></div>
+      />
     </div>
     <p class="text-sm mt-1 text-gray-600">
       {{ xpProgress.current }} / {{ xpProgress.needed }} XP
@@ -27,7 +27,7 @@ defineProps<{
   user: User;
 }>();
 
-const slugFromTitle = (title: String) => {
+const slugFromTitle = (title: string) => {
   return title
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')

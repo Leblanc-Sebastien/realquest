@@ -4,26 +4,26 @@
       <NuxtLink to="/register" class="text-[0.8em] pb-[15px] text-blue-800"
         >Je n'ai pas encore de compte ...</NuxtLink
       >
-      <form @submit.prevent="validateFormLogin" class="w-full">
+      <form class="w-full" @submit.prevent="validateFormLogin">
         <input
-          type="text"
           v-model="userName"
+          type="text"
           placeholder="Nom d'utilisateur"
           class="w-full p-2 border mb-2 text-text"
         />
         <div class="relative w-full mb-2">
           <input
+            v-model="password"
             required
             minlength="5"
             :type="showPassword ? 'text' : 'password'"
-            v-model="password"
             placeholder="Mot de passe"
             class="w-full p-2 border border-gray-300 rounded text-text"
           />
           <button
             type="button"
-            @click="showPassword = !showPassword"
             class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
+            @click="showPassword = !showPassword"
           >
             <Icon
               :name="showPassword ? 'mdi:eye-off' : 'mdi:eye'"

@@ -1,7 +1,6 @@
 // @vitest-environment nuxt
 
-import { describe, it, expect, vi } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { describe, it, expect } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import Modal from '~/components/common/Modal.vue';
 

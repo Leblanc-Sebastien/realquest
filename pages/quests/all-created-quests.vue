@@ -39,7 +39,7 @@
     </div>
     <Modal
       :show="deleteModalVisible"
-      title="Suppression du compte"
+      title="Suppression de quête"
       confirm-text="Valider"
       @confirm="deleteQuest"
       @cancel="cancelModal"

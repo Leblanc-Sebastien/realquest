@@ -1,16 +1,16 @@
 <template>
   <LogoTopLayout title="Ajouter une quête :">
     <template #content>
-      <form @submit.prevent="validateFormQuest" class="w-full">
+      <form class="w-full" @submit.prevent="validateFormQuest">
         <input
-          type="text"
           v-model="title"
+          type="text"
           placeholder="Titre"
           class="w-full p-2 border mb-2 text-text"
         />
         <input
-          type="text"
           v-model="description"
+          type="text"
           placeholder="Description"
           class="w-full p-2 border mb-2 text-text"
         />
@@ -22,8 +22,8 @@
           <option disabled :value="null">-- Choisissez une fréquence --</option>
           <option
             v-for="(frequency, key) in frequencies"
-            :value="key"
             :key="key"
+            :value="key"
           >
             {{ frequency }}
           </option>
@@ -47,7 +47,6 @@ import { StateAlert } from '~/types/alert';
 import type { Frequency } from '~/types/quest';
 
 const authStore = useAuthStore();
-const userStore = useUserStore();
 
 const frequencies = ref<Record<Frequency, string>>({
   NONE: 'Unique',
@@ -80,9 +79,6 @@ const showAlertTrigger = (state: StateAlert, message: string) => {
     showStateAlert.value = StateAlert.fail;
     showAlert.value = true;
   }
-  setTimeout(() => {
-    showAlert.value = false;
-  }, 2000);
 };
 
 const validateFormQuest = async () => {
@@ -95,7 +91,6 @@ const validateFormQuest = async () => {
   ) {
     try {
       authStore.loadToken();
-      await userStore.fetchUser();
 
       await $fetch('/api/quests/add', {
         baseURL: config.public.apiBase,

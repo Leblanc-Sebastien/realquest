@@ -31,7 +31,7 @@ vi.mock('nuxt/app', async () => {
 
 describe('AddQuestPage.vue', () => {
   beforeEach(() => {
-    registerEndpoint('/api/quests/add', async (req) => {
+    registerEndpoint('/api/quests/add', async () => {
       return { status: 'ok' };
     });
   });

@@ -1,11 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import {
-  mockNuxtImport,
-  mountSuspended,
-  registerEndpoint,
-} from '@nuxt/test-utils/runtime';
-import MyQuestsPage from '~/pages/quests/all-created-quests.vue'; // adapte le chemin
-import { StateAlert } from '~/types/alert';
+import { mountSuspended, registerEndpoint } from '@nuxt/test-utils/runtime';
+import MyQuestsPage from '~/pages/quests/all-created-quests.vue';
 import { flushPromises } from '@vue/test-utils';
 
 const mockFetchUser = vi.fn();
@@ -48,7 +43,7 @@ vi.mock('nuxt/app', async () => {
 
 describe('MyQuestsPage.vue', () => {
   beforeEach(() => {
-    registerEndpoint('/api/quests/delete', async (req) => {
+    registerEndpoint('/api/quests/delete', async () => {
       return { status: 'ok' };
     });
 

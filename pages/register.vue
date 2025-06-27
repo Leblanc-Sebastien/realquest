@@ -4,10 +4,10 @@
       <NuxtLink to="/login" class="text-[0.8em] pb-[15px] text-blue-800"
         >J'ai déjà un compte ...</NuxtLink
       >
-      <form @submit.prevent="validateFormRegister" class="w-full">
+      <form class="w-full" @submit.prevent="validateFormRegister">
         <input
-          type="text"
           v-model="userName"
+          type="text"
           placeholder="Nom d'utilisateur"
           class="w-full p-2 border mb-2 text-text"
         />
@@ -19,17 +19,17 @@
         />
         <div class="relative w-full mb-2">
           <input
+            v-model="password"
             required
             minlength="5"
             :type="showPassword ? 'text' : 'password'"
-            v-model="password"
             placeholder="Mot de passe"
             class="w-full p-2 border border-gray-300 rounded text-text"
           />
           <button
+            class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
             type="button"
             @click="showPassword = !showPassword"
-            class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
           >
             <Icon
               :name="showPassword ? 'mdi:eye-off' : 'mdi:eye'"
@@ -39,16 +39,16 @@
         </div>
         <div class="relative w-full mb-2">
           <input
+            v-model="confirmPassword"
             required
             :type="showConfirmPassword ? 'text' : 'password'"
-            v-model="confirmPassword"
             placeholder="Confirmation"
             class="w-full p-2 border border-gray-300 rounded text-text"
           />
           <button
+            class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
             type="button"
             @click="showConfirmPassword = !showConfirmPassword"
-            class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
           >
             <Icon
               :name="showConfirmPassword ? 'mdi:eye-off' : 'mdi:eye'"

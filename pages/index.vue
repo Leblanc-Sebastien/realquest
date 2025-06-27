@@ -100,10 +100,8 @@ const validateQuests = async () => {
 
     authStore.loadToken();
 
-    // Recharge les quêtes pour actualiser la liste
     await questsStore.fetchQuests();
 
-    // Recharge le user pour avoir l'xp et le niveau à jour
     await userStore.fetchUser();
 
     // Reset les quêtes cochées
